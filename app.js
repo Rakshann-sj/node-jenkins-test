@@ -1,10 +1,5 @@
-const http = require('http');
+console.log("Jenkins Build Started");
 
-const server = http.createServer((req, res) => {
-    res.write('Hello from Jenkins Pipeline');
-    res.end();
-});
+console.log("Node.js Pipeline Working");
 
-server.listen(3000, () => {
-    console.log('Server running on port 3000');
-});
+console.log("Build Successful");
