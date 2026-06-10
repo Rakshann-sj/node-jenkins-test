@@ -4,17 +4,33 @@ pipeline {
 
     stages {
 
+        stage('Checkout') {
+            steps {
+                echo 'Repository Cloned'
+            }
+        }
+
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                dir('react-jenkins-demo') {
+                    sh 'npm install'
+                }
             }
         }
 
-        stage('Run Node Application') {
+        stage('Build React App') {
             steps {
-                sh 'node app.js'
+                dir('react-jenkins-demo') {
+                    sh 'npm run build'
+                }
             }
         }
 
+    }
+
+    post {
+        success {
+            archiveArtifacts artifacts: 'react-jenkins-demo/build/**'
+        }
     }
 }
